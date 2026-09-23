@@ -21,7 +21,7 @@ async def transcribe_facebook(
         workdir = Path(temp_dir)
         media = await download_audio(normalized_url, workdir)
         chunks = await split_audio(media.audio_path, workdir)
-        transcript, segments = await transcribe_chunks(
+        transcript, segments, detected_language = await transcribe_chunks(
             chunks,
             language=language,
             timestamps=timestamps,
@@ -33,7 +33,9 @@ async def transcribe_facebook(
             "source_url": media.webpage_url or normalized_url,
             "title": media.title,
             "duration_seconds": media.duration_seconds,
-            "language": language,
+            "language": detected_language or language,
+            "requested_language": language,
+            "transcription_engine": "faster-whisper",
             "timestamps": timestamps,
             "transcript": transcript,
             "segments": segments if timestamps else [],

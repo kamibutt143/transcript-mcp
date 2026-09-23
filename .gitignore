@@ -1,0 +1,11 @@
+.env
+.env.*
+*.cookies
+cookies.txt
+tmp/
+data/
+downloads/
+*.log
+__pycache__/
+.pytest_cache/
+.venv/

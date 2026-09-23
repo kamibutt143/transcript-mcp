@@ -34,7 +34,7 @@ async def transcribe_facebook_video(
     Args:
         url: Facebook video, reel, watch, share, or fb.watch URL.
         language: ISO-639-1 language code such as en or nl, or 'auto'.
-        timestamps: Include segment timestamps. Timestamp mode uses the configured timestamp model.
+        timestamps: Include segment timestamps from the local Whisper model.
     """
     try:
         return await transcribe_facebook(
@@ -52,7 +52,14 @@ async def transcribe_facebook_video(
 
 @mcp.custom_route("/health", methods=["GET"])
 async def health(_: Request) -> Response:
-    return JSONResponse({"status": "ok", "service": "softnest-transcript-mcp"})
+    return JSONResponse(
+        {
+            "status": "ok",
+            "service": "softnest-transcript-mcp",
+            "transcription_engine": "faster-whisper",
+            "whisper_model": settings.whisper_model,
+        }
+    )
 
 
 @mcp.custom_route("/v1/transcribe", methods=["POST"])

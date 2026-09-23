@@ -7,8 +7,14 @@ services:
       - .env
     ports:
       - "8000:8000"
+    volumes:
+      # Hugging Face/faster-whisper model cache. The first transcription downloads
+      # the configured model; later container restarts reuse it from this volume.
+      - whisper_models:/models
     # Optional authenticated Facebook cookies:
-    # volumes:
     #   - ./secrets/facebook_cookies.txt:/run/secrets/facebook_cookies.txt:ro
     # environment:
     #   YTDLP_COOKIES_FILE: /run/secrets/facebook_cookies.txt
+
+volumes:
+  whisper_models:

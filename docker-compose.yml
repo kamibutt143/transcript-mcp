@@ -15,6 +15,14 @@ services:
     #   - ./secrets/facebook_cookies.txt:/run/secrets/facebook_cookies.txt:ro
     # environment:
     #   YTDLP_COOKIES_FILE: /run/secrets/facebook_cookies.txt
+    networks:
+      - default
+      - softnest-automation
 
 volumes:
   whisper_models:
+
+networks:
+  softnest-automation:
+    external: true
+    name: softnest-automation_automation

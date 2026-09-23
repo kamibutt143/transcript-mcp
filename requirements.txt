@@ -1,0 +1,5 @@
+mcp==2.2.0
+openai==3.17.0
+yt-dlp[default]==2026.8.19
+starlette>=0.47,<1
+uvicorn[standard]>=0.30,<1

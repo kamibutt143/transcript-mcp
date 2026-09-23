@@ -1,0 +1,14 @@
+services:
+  transcript-mcp:
+    build: .
+    container_name: softnest-transcript-mcp
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    # Optional authenticated Facebook cookies:
+    # volumes:
+    #   - ./secrets/facebook_cookies.txt:/run/secrets/facebook_cookies.txt:ro
+    # environment:
+    #   YTDLP_COOKIES_FILE: /run/secrets/facebook_cookies.txt
